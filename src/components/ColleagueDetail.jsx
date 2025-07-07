@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import './ColleagueDetail.css';
 
 const ColleagueDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [colleague, setColleague] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchColleague();
-  }, [id]);
-
-  const fetchColleague = async () => {
+  const fetchColleague = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:3001/api/colleagues/${id}`);
       if (!response.ok) {
@@ -32,7 +29,11 @@ const ColleagueDetail = () => {
       setLoading(false);
       console.error('Error fetching colleague:', err);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchColleague();
+  }, [fetchColleague]);
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Not specified';
@@ -90,6 +91,12 @@ const ColleagueDetail = () => {
         <Link to="/" className="back-link">
           ← Back to Team
         </Link>
+        <button 
+          onClick={() => navigate(`/edit/${id}`)} 
+          className="edit-colleague-btn"
+        >
+          Edit Colleague
+        </button>
       </div>
       
       <div className="detail-content">

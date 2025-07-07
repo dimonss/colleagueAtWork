@@ -6,6 +6,9 @@
 }
 
 .detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px;
 }
 
@@ -21,6 +24,23 @@
 
 .back-link:hover {
   color: #e0e0e0;
+}
+
+.edit-colleague-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-colleague-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .detail-content {
@@ -189,6 +209,16 @@
   
   .colleague-detail {
     padding: 15px;
+  }
+  
+  .detail-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .edit-colleague-btn {
+    width: 100%;
   }
 }
 

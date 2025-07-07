@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ColleaguesList.css';
 
 const ColleaguesList = () => {
+  const navigate = useNavigate();
   const [colleagues, setColleagues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -49,7 +50,15 @@ const ColleaguesList = () => {
 
   return (
     <div className="colleagues-list">
-      <h1>Our Team</h1>
+      <div className="list-header">
+        <h1>Our Team</h1>
+        <button 
+          onClick={() => navigate('/add')} 
+          className="add-colleague-btn"
+        >
+          + Add Colleague
+        </button>
+      </div>
       <div className="colleagues-grid">
         {colleagues.map((colleague) => (
           <Link 

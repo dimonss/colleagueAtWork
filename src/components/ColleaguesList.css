@@ -4,12 +4,35 @@
   padding: 20px;
 }
 
-.colleagues-list h1 {
-  text-align: center;
-  color: white;
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 40px;
+}
+
+.colleagues-list h1 {
+  color: white;
+  margin: 0;
   font-size: 2.5rem;
   font-weight: 300;
+}
+
+.add-colleague-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-colleague-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .colleagues-grid {
@@ -148,7 +171,17 @@
     padding: 15px;
   }
   
+  .list-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
   .colleagues-list h1 {
     font-size: 2rem;
+  }
+  
+  .add-colleague-btn {
+    width: 100%;
   }
 } 
