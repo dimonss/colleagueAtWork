@@ -1,10 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import './ColleagueForm.css';
 
 const ColleagueForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, authHeader } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
@@ -21,6 +24,13 @@ const ColleagueForm = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
 
   const isEditing = Boolean(id);
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', { state: { from: location } });
+    }
+  }, [user, navigate, location]);
 
   const fetchColleague = useCallback(async () => {
     try {
@@ -108,6 +118,7 @@ const ColleagueForm = () => {
 
       const response = await fetch(url, {
         method,
+        headers: authHeader ? { 'Authorization': authHeader } : undefined,
         body: formDataToSend
       });
 
