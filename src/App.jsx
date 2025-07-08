@@ -3,6 +3,7 @@ import ColleaguesList from './components/ColleaguesList';
 import ColleagueDetail from './components/ColleagueDetail';
 import ColleagueForm from './components/ColleagueForm';
 import Login from './components/Login';
+import Navigation from './components/Navigation';
 import { AuthProvider } from './context/AuthProvider';
 import './App.css';
 
@@ -11,6 +12,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
+          <Navigation />
           <Routes>
             <Route path="/" element={<ColleaguesList />} />
             <Route path="/colleague/:id" element={<ColleagueDetail />} />

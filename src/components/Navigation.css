@@ -1,0 +1,149 @@
+.navigation {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+}
+
+.nav-title {
+  color: white;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-title:hover {
+  transform: scale(1.05);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.auth-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.user-icon {
+  font-size: 1.2rem;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-indicator.online {
+  background: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.offline {
+  background: #f87171;
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  }
+}
+
+.nav-logout-button,
+.nav-login-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-logout-button:hover,
+.nav-login-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-logout-button:active,
+.nav-login-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 0 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-title {
+    font-size: 1.3rem;
+  }
+  
+  .auth-status {
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .username {
+    font-size: 0.8rem;
+  }
+  
+  .nav-logout-button,
+  .nav-login-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+} 
