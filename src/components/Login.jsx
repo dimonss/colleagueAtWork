@@ -25,12 +25,12 @@ const Login = () => {
     setError('');
 
     try {
+      const authHeader = 'Basic ' + btoa(`${credentials.username}:${credentials.password}`);
       const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials)
+          'Authorization': authHeader,
+        }
       });
 
       if (response.ok) {
