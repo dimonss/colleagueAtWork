@@ -1,14 +1,26 @@
+import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Modal from './Modal';
 import './Navigation.css';
 
 const Navigation = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
+  };
+
+  const handleLogoutConfirm = () => {
     logout();
     navigate('/');
+    setShowLogoutModal(false);
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false);
   };
 
   return (
@@ -28,7 +40,7 @@ const Navigation = () => {
                 <span className="username">{user.username}</span>
                 <span className="status-indicator online"></span>
               </span>
-              <button onClick={handleLogout} className="nav-logout-button">
+              <button onClick={handleLogoutClick} className="nav-logout-button">
                 Logout
               </button>
             </div>
@@ -46,6 +58,16 @@ const Navigation = () => {
           )}
         </div>
       </div>
+      
+      <Modal
+        isOpen={showLogoutModal}
+        onClose={handleLogoutCancel}
+        onConfirm={handleLogoutConfirm}
+        title="Confirm Logout"
+        message="Are you sure you want to logout? You will need to login again to add or edit colleagues."
+        confirmText="Logout"
+        cancelText="Cancel"
+      />
     </nav>
   );
 };
