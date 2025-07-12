@@ -77,11 +77,69 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+.detail-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  gap: 1rem;
+}
+
 .detail-info h1 {
   color: white;
-  margin: 0 0 30px 0;
+  margin: 0;
   font-size: 2.5rem;
   font-weight: 600;
+  flex: 1;
+}
+
+.status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-indicator {
+  font-size: 1.5rem;
+}
+
+.status-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.status-button.at-work {
+  background: #10b981;
+  color: white;
+}
+
+.status-button.at-work:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.status-button.not-at-work {
+  background: #ef4444;
+  color: white;
+}
+
+.status-button.not-at-work:hover:not(:disabled) {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.status-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .info-section {
@@ -197,6 +255,22 @@
   
   .detail-photo {
     max-width: 300px;
+  }
+  
+  .detail-header-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .status-toggle {
+    align-self: flex-start;
+  }
+  
+  .status-button {
+    min-width: 100px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
   }
   
   .detail-info h1 {

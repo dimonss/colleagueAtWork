@@ -76,9 +76,17 @@ const ColleaguesList = () => {
               )}
             </div>
             <div className="colleague-info">
-              <h3>{colleague.name}</h3>
+              <div className="colleague-header">
+                <h3>{colleague.name}</h3>
+                <span className={`status-dot ${colleague.is_at_work ? 'online' : 'offline'}`}>
+                  {colleague.is_at_work ? '🟢' : '🔴'}
+                </span>
+              </div>
               <p className="position">{colleague.position || 'Position not specified'}</p>
               <p className="department">{colleague.department || 'Department not specified'}</p>
+              <p className="status-text">
+                {colleague.is_at_work ? 'At Work' : 'Not at Work'}
+              </p>
             </div>
           </Link>
         ))}

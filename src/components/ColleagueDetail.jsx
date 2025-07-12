@@ -8,6 +8,7 @@ const ColleagueDetail = () => {
   const [colleague, setColleague] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [statusLoading, setStatusLoading] = useState(false);
 
   const fetchColleague = useCallback(async () => {
     try {
@@ -50,6 +51,32 @@ const ColleagueDetail = () => {
       style: 'currency',
       currency: 'USD'
     }).format(salary);
+  };
+
+  const handleStatusToggle = async () => {
+    if (!colleague) return;
+    
+    setStatusLoading(true);
+    try {
+      const response = await fetch(`http://localhost:3001/api/colleagues/${id}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ is_at_work: !colleague.is_at_work })
+      });
+
+      if (response.ok) {
+        const updatedColleague = await response.json();
+        setColleague(updatedColleague);
+      } else {
+        console.error('Failed to update status');
+      }
+    } catch (err) {
+      console.error('Error updating status:', err);
+    } finally {
+      setStatusLoading(false);
+    }
   };
 
   if (loading) {
@@ -111,7 +138,21 @@ const ColleagueDetail = () => {
         </div>
         
         <div className="detail-info">
-          <h1>{colleague.name}</h1>
+          <div className="detail-header-info">
+            <h1>{colleague.name}</h1>
+            <div className="status-toggle">
+              <span className={`status-indicator ${colleague.is_at_work ? 'online' : 'offline'}`}>
+                {colleague.is_at_work ? '🟢' : '🔴'}
+              </span>
+              <button 
+                onClick={handleStatusToggle}
+                disabled={statusLoading}
+                className={`status-button ${colleague.is_at_work ? 'at-work' : 'not-at-work'}`}
+              >
+                {statusLoading ? 'Updating...' : (colleague.is_at_work ? 'At Work' : 'Not at Work')}
+              </button>
+            </div>
+          </div>
           
           <div className="info-section">
             <h3>Position</h3>

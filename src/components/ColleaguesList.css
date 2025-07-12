@@ -95,11 +95,31 @@
   padding: 20px;
 }
 
+.colleague-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 .colleague-info h3 {
-  margin: 0 0 8px 0;
+  margin: 0;
   color: #333;
   font-size: 1.3rem;
   font-weight: 600;
+  flex: 1;
+}
+
+.status-dot {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.status-text {
+  margin: 8px 0 0 0;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .position {
