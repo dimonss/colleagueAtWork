@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useStatusStream } from '../hooks/useStatusStream';
 import './ColleaguesList.css';
 
 const ColleaguesList = () => {
@@ -7,6 +8,7 @@ const ColleaguesList = () => {
   const [colleagues, setColleagues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { getStatus } = useStatusStream();
 
   useEffect(() => {
     fetchColleagues();
@@ -80,15 +82,12 @@ const ColleaguesList = () => {
                 <h3>{colleague.name}</h3>
               <p className="position">{colleague.position || 'Position not specified'}</p>
               <p className="department">{colleague.department || 'Department not specified'}</p>
-              <div className="colleague-header">
-
               <p className="status-text">
-                {colleague.is_at_work ? 'At Work' : 'Not at Work'}
-              </p>
-                <span className={`status-dot ${colleague.is_at_work ? 'online' : 'offline'}`}>
-                  {colleague.is_at_work ? '🟢' : '🔴'}
+                {getStatus(colleague.id) !== null ? (getStatus(colleague.id) ? 'At Work' : 'Not at Work') : (colleague.is_at_work ? 'At Work' : 'Not at Work')}
+                <span className={`status-dot ${getStatus(colleague.id) !== null ? (getStatus(colleague.id) ? 'online' : 'offline') : (colleague.is_at_work ? 'online' : 'offline')}`}>
+                  {getStatus(colleague.id) !== null ? (getStatus(colleague.id) ? '🟢' : '🔴') : (colleague.is_at_work ? '🟢' : '🔴')}
                 </span>
-              </div>
+              </p>
             </div>
           </Link>
         ))}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useStatusStream } from '../hooks/useStatusStream';
 import './ColleagueDetail.css';
 
 const ColleagueDetail = () => {
@@ -9,6 +10,7 @@ const ColleagueDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [statusLoading, setStatusLoading] = useState(false);
+  const { getStatus } = useStatusStream();
 
   const fetchColleague = useCallback(async () => {
     try {
@@ -53,8 +55,18 @@ const ColleagueDetail = () => {
     }).format(salary);
   };
 
+  // Get synchronized status - prioritize SSE data over local data
+  const getCurrentStatus = () => {
+    if (!colleague) return null;
+    const sseStatus = getStatus(colleague.id);
+    return sseStatus !== null ? sseStatus : colleague.is_at_work;
+  };
+
   const handleStatusToggle = async () => {
     if (!colleague) return;
+    
+    const currentStatus = getCurrentStatus();
+    const newStatus = !currentStatus;
     
     setStatusLoading(true);
     try {
@@ -63,12 +75,11 @@ const ColleagueDetail = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ is_at_work: !colleague.is_at_work })
+        body: JSON.stringify({ is_at_work: newStatus })
       });
 
       if (response.ok) {
-        const updatedColleague = await response.json();
-        setColleague(updatedColleague);
+        console.log('Status updated successfully');
       } else {
         console.error('Failed to update status');
       }
@@ -141,12 +152,15 @@ const ColleagueDetail = () => {
           <div className="detail-header-info">
             <h1>{colleague.name}</h1>
             <div className="status-toggle">
+              <span className={`status-indicator ${getCurrentStatus() ? 'online' : 'offline'}`}>
+                {getCurrentStatus() ? '🟢' : '🔴'}
+              </span>
               <button 
                 onClick={handleStatusToggle}
                 disabled={statusLoading}
-                className={`status-button ${colleague.is_at_work ? 'at-work' : 'not-at-work'}`}
+                className={`status-button ${getCurrentStatus() ? 'at-work' : 'not-at-work'}`}
               >
-                {statusLoading ? 'Updating...' : (colleague.is_at_work ? 'At Work' : 'Not at Work')}
+                {statusLoading ? 'Updating...' : (getCurrentStatus() ? 'At Work' : 'Not at Work')}
               </button>
             </div>
           </div>

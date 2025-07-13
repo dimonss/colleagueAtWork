@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { useStatusStream } from '../hooks/useStatusStream';
 import Modal from './Modal';
 import './Navigation.css';
 
@@ -8,6 +9,7 @@ const Navigation = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { isConnected } = useStatusStream();
 
   const handleLogoutClick = () => {
     setShowLogoutModal(true);
@@ -30,6 +32,14 @@ const Navigation = () => {
           <h1 onClick={() => navigate('/')} className="nav-title">
             Colleagues Directory
           </h1>
+          <div className="connection-status">
+            <span className="online-status-indicator">
+              {isConnected ? '🟢' : '🔴'}
+            </span>
+            <span className="status-text">
+              {isConnected ? 'Live' : 'Offline'}
+            </span>
+          </div>
         </div>
         
         <div className="nav-actions">

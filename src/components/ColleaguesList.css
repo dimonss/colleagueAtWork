@@ -95,13 +95,6 @@
   padding: 20px;
 }
 
-.colleague-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
 .colleague-info h3 {
   margin: 0;
   color: #333;
@@ -116,7 +109,6 @@
 }
 
 .status-text {
-  margin: 8px 0 0 0;
   color: #666;
   font-size: 0.9rem;
   font-weight: 500;
