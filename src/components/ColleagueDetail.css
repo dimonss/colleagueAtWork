@@ -93,12 +93,6 @@
   flex: 1;
 }
 
-.status-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .status-indicator {
   font-size: 1.5rem;
 }
@@ -261,10 +255,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-  }
-  
-  .status-toggle {
-    align-self: flex-start;
   }
   
   .status-button {

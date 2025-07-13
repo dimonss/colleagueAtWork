@@ -52,18 +52,19 @@ const ColleaguesList = () => {
     <div className="colleagues-list">
       <div className="list-header">
         <h1>Our Team</h1>
-        <button 
-          onClick={() => navigate('/add')} 
+        <button
+          onClick={() => navigate('/add')}
           className="add-colleague-btn"
         >
+
           + Add Colleague
         </button>
       </div>
       <div className="colleagues-grid">
         {colleagues.map((colleague) => (
-          <Link 
-            to={`/colleague/${colleague.id}`} 
-            key={colleague.id} 
+          <Link
+            to={`/colleague/${colleague.id}`}
+            key={colleague.id}
             className="colleague-card"
           >
             <div className="colleague-photo">
@@ -76,17 +77,18 @@ const ColleaguesList = () => {
               )}
             </div>
             <div className="colleague-info">
-              <div className="colleague-header">
                 <h3>{colleague.name}</h3>
+              <p className="position">{colleague.position || 'Position not specified'}</p>
+              <p className="department">{colleague.department || 'Department not specified'}</p>
+              <div className="colleague-header">
+
+              <p className="status-text">
+                {colleague.is_at_work ? 'At Work' : 'Not at Work'}
+              </p>
                 <span className={`status-dot ${colleague.is_at_work ? 'online' : 'offline'}`}>
                   {colleague.is_at_work ? '🟢' : '🔴'}
                 </span>
               </div>
-              <p className="position">{colleague.position || 'Position not specified'}</p>
-              <p className="department">{colleague.department || 'Department not specified'}</p>
-              <p className="status-text">
-                {colleague.is_at_work ? 'At Work' : 'Not at Work'}
-              </p>
             </div>
           </Link>
         ))}

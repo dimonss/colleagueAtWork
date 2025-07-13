@@ -141,9 +141,6 @@ const ColleagueDetail = () => {
           <div className="detail-header-info">
             <h1>{colleague.name}</h1>
             <div className="status-toggle">
-              <span className={`status-indicator ${colleague.is_at_work ? 'online' : 'offline'}`}>
-                {colleague.is_at_work ? '🟢' : '🔴'}
-              </span>
               <button 
                 onClick={handleStatusToggle}
                 disabled={statusLoading}
