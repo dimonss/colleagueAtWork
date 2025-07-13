@@ -151,47 +151,51 @@ const ColleagueDetail = () => {
             </div>
           </div>
           
-          <div className="info-section">
-            <h3>Position</h3>
-            <p>{colleague.position || 'Not specified'}</p>
-          </div>
+          {colleague.position && (
+            <div className="info-section">
+              <h3>Position</h3>
+              <p>{colleague.position}</p>
+            </div>
+          )}
           
-          <div className="info-section">
-            <h3>Department</h3>
-            <p>{colleague.department || 'Not specified'}</p>
-          </div>
+          {colleague.department && (
+            <div className="info-section">
+              <h3>Department</h3>
+              <p>{colleague.department}</p>
+            </div>
+          )}
           
-          <div className="info-section">
-            <h3>Email</h3>
-            <p>
-              {colleague.email ? (
+          {colleague.email && (
+            <div className="info-section">
+              <h3>Email</h3>
+              <p>
                 <a href={`mailto:${colleague.email}`}>{colleague.email}</a>
-              ) : (
-                'Not specified'
-              )}
-            </p>
-          </div>
+              </p>
+            </div>
+          )}
           
-          <div className="info-section">
-            <h3>Phone</h3>
-            <p>
-              {colleague.phone ? (
+          {colleague.phone && (
+            <div className="info-section">
+              <h3>Phone</h3>
+              <p>
                 <a href={`tel:${colleague.phone}`}>{colleague.phone}</a>
-              ) : (
-                'Not specified'
-              )}
-            </p>
-          </div>
+              </p>
+            </div>
+          )}
           
-          <div className="info-section">
-            <h3>Hire Date</h3>
-            <p>{formatDate(colleague.hire_date)}</p>
-          </div>
+          {colleague.hire_date && (
+            <div className="info-section">
+              <h3>Hire Date</h3>
+              <p>{formatDate(colleague.hire_date)}</p>
+            </div>
+          )}
           
-          <div className="info-section">
-            <h3>Salary</h3>
-            <p>{formatSalary(colleague.salary)}</p>
-          </div>
+          {colleague.salary && (
+            <div className="info-section">
+              <h3>Salary</h3>
+              <p>{formatSalary(colleague.salary)}</p>
+            </div>
+          )}
           
           {colleague.notes && (
             <div className="info-section">
