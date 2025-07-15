@@ -8,9 +8,11 @@ import { AuthProvider } from './context/AuthProvider';
 import './App.css';
 
 function App() {
+  // Use /colleagues as basename for both development and production
+  const basename = '/colleagues';
   return (
     <AuthProvider>
-      <Router>
+      <Router basename={basename}>
         <div className="App">
           <Navigation />
           <Routes>

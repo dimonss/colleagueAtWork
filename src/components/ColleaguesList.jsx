@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStatusStream } from '../hooks/useStatusStream';
+import { API_BASE_URL } from '../config/api';
 import './ColleaguesList.css';
 
 const ColleaguesList = () => {
@@ -16,7 +17,7 @@ const ColleaguesList = () => {
 
   const fetchColleagues = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/colleagues');
+      const response = await fetch(`${API_BASE_URL}/colleagues`);
       if (!response.ok) {
         setError('Failed to load colleagues');
         setLoading(false);

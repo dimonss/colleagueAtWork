@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { API_BASE_URL } from '../config/api';
 import './ColleagueForm.css';
 
 const ColleagueForm = () => {
@@ -34,7 +35,7 @@ const ColleagueForm = () => {
 
   const fetchColleague = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/colleagues/${id}`);
+      const response = await fetch(`${API_BASE_URL}/colleagues/${id}`);
       if (!response.ok) {
         setError('Failed to fetch colleague');
         return;
@@ -111,8 +112,8 @@ const ColleagueForm = () => {
       }
 
       const url = isEditing 
-        ? `http://localhost:3001/api/colleagues/${id}`
-        : 'http://localhost:3001/api/colleagues';
+        ? `${API_BASE_URL}/colleagues/${id}`
+        : `${API_BASE_URL}/colleagues`;
       
       const method = isEditing ? 'PUT' : 'POST';
 

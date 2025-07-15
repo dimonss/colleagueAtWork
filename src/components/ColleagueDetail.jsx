@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useStatusStream } from '../hooks/useStatusStream';
+import { API_BASE_URL } from '../config/api';
 import './ColleagueDetail.css';
 
 const ColleagueDetail = () => {
@@ -14,7 +15,7 @@ const ColleagueDetail = () => {
 
   const fetchColleague = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/colleagues/${id}`);
+      const response = await fetch(`${API_BASE_URL}/colleagues/${id}`);
       if (!response.ok) {
         if (response.status === 404) {
           setError('Colleague not found');
@@ -70,7 +71,7 @@ const ColleagueDetail = () => {
     
     setStatusLoading(true);
     try {
-      const response = await fetch(`http://localhost:3001/api/colleagues/${id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/colleagues/${id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

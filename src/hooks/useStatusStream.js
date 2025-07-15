@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { API_BASE_URL } from '../config/api';
 
 export const useStatusStream = () => {
   const [statusData, setStatusData] = useState({});
@@ -7,7 +8,7 @@ export const useStatusStream = () => {
 
   const connect = useCallback(() => {
     try {
-      const eventSource = new EventSource('http://localhost:3001/api/colleagues/status/stream');
+      const eventSource = new EventSource(`${API_BASE_URL}/colleagues/status/stream`);
       
       eventSource.onopen = () => {
         setIsConnected(true);
