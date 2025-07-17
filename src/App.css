@@ -88,6 +88,6 @@ button.reject {
 
 .error {
   color: #f44336;
-  margin-top: 10px;
+  margin: 20px auto;
   font-weight: bold;
 }
