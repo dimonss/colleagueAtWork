@@ -50,21 +50,49 @@
 }
 
 .delete-colleague-btn {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  padding: 10px 20px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ff6b9d;
+  border: 2px solid rgba(255, 107, 157, 0.4);
+  padding: 6px 20px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .delete-colleague-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.5);
-  color: #dc2626;
+  background: rgba(255, 107, 157, 0.2);
+  border-color: rgba(255, 107, 157, 0.7);
+  color: #ff4d8d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+}
+
+.delete-colleague-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 107, 157, 0.3);
+}
+
+.delete-colleague-btn::before {
+  content: '🗑️';
+  margin-right: 8px;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  display: inline-block;
+  transform: scale(1.1);
+  vertical-align: middle;
+}
+
+.delete-colleague-btn:hover::before {
+  transform: scale(1.2);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 
 .detail-content {

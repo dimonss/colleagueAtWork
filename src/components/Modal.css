@@ -114,14 +114,14 @@
 }
 
 .modal-button.confirm {
-  background: #dc2626;
+  background: #ff6b9d;
   color: white;
 }
 
 .modal-button.confirm:hover {
-  background: #b91c1c;
+  background: #ff4d8d;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
 }
 
 .modal-button:active {

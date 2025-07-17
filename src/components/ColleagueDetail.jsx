@@ -184,7 +184,7 @@ const ColleagueDetail = () => {
               onClick={handleDeleteClick}
               className="delete-colleague-btn"
             >
-              Delete Colleague
+              Delete
             </button>
           )}
         </div>
@@ -286,7 +286,6 @@ const ColleagueDetail = () => {
         message={`Are you sure you want to delete ${colleague.name}? This action cannot be undone and will permanently remove all their information and photo.`}
         confirmText={deleteLoading ? "Deleting..." : "Delete"}
         cancelText="Cancel"
-        confirmButtonClass="danger"
       />
     </div>
   );

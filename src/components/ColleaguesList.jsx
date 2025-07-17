@@ -161,7 +161,6 @@ const ColleaguesList = () => {
         message={colleagueToDelete ? `Are you sure you want to delete ${colleagueToDelete.name}? This action cannot be undone and will permanently remove all their information and photo.` : ''}
         confirmText={deleteLoading ? "Deleting..." : "Delete"}
         cancelText="Cancel"
-        confirmButtonClass="danger"
       />
     </div>
   );
