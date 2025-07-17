@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './Modal.css';
 
-const Modal = ({ isOpen, onClose, onConfirm, title, message, confirmText = 'Confirm', cancelText = 'Cancel' }) => {
+const Modal = ({ isOpen, onClose, onConfirm, title, message, confirmText = 'Confirm', cancelText = 'Cancel', confirmButtonClass = 'confirm' }) => {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -40,7 +40,7 @@ const Modal = ({ isOpen, onClose, onConfirm, title, message, confirmText = 'Conf
           <button onClick={onClose} className="modal-button cancel">
             {cancelText}
           </button>
-          <button onClick={onConfirm} className="modal-button confirm">
+          <button onClick={onConfirm} className={`modal-button ${confirmButtonClass}`}>
             {confirmText}
           </button>
         </div>

@@ -1,16 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useStatusStream } from '../hooks/useStatusStream';
+import { useAuth } from '../hooks/useAuth';
 import { API_BASE_URL } from '../config/api';
+import Modal from './Modal';
 import './ColleagueDetail.css';
 
 const ColleagueDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user, authHeader } = useAuth();
   const [colleague, setColleague] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [statusLoading, setStatusLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { getStatus } = useStatusStream();
 
   const fetchColleague = useCallback(async () => {
@@ -91,6 +96,43 @@ const ColleagueDetail = () => {
     }
   };
 
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!user || !authHeader) {
+      setError('Authentication required to delete colleague');
+      return;
+    }
+
+    setDeleteLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/colleagues/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': authHeader,
+        }
+      });
+
+      if (response.ok) {
+        navigate('/', { replace: true });
+      } else {
+        setError('Failed to delete colleague');
+      }
+    } catch (err) {
+      setError('Failed to delete colleague');
+      console.error('Error deleting colleague:', err);
+    } finally {
+      setDeleteLoading(false);
+      setShowDeleteModal(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  };
+
   if (loading) {
     return (
       <div className="loading">
@@ -130,12 +172,22 @@ const ColleagueDetail = () => {
         <Link to="/" className="back-link">
           ← Back to Team
         </Link>
-        <button 
-          onClick={() => navigate(`/edit/${id}`)} 
-          className="edit-colleague-btn"
-        >
-          Edit Colleague
-        </button>
+        <div className="detail-actions">
+          <button 
+            onClick={() => navigate(`/edit/${id}`)} 
+            className="edit-colleague-btn"
+          >
+            Edit Colleague
+          </button>
+          {user && (
+            <button 
+              onClick={handleDeleteClick}
+              className="delete-colleague-btn"
+            >
+              Delete Colleague
+            </button>
+          )}
+        </div>
       </div>
       
       <div className="detail-content">
@@ -225,6 +277,17 @@ const ColleagueDetail = () => {
           </div>
         </div>
       </div>
+      
+      <Modal
+        isOpen={showDeleteModal}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Colleague"
+        message={`Are you sure you want to delete ${colleague.name}? This action cannot be undone and will permanently remove all their information and photo.`}
+        confirmText={deleteLoading ? "Deleting..." : "Delete"}
+        cancelText="Cancel"
+        confirmButtonClass="danger"
+      />
     </div>
   );
 };
