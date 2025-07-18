@@ -71,12 +71,6 @@ a {
   margin-top: 20px;
 }
 
-button:last-child {
-  @media (max-width: 1024px) {
-    margin-top: 16px;
-  }
-}
-
 button.reject {
   background-color: #f44336;
 }
